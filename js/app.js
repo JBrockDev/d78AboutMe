@@ -75,7 +75,6 @@ if ((pokerGuess.toLowerCase() === 'yes' || pokerGuess.toLowerCase() === 'y') && 
   alert(alertMsg);
   //console.log("You were wrong.");
 }
-
 over30Guess = prompt("Am I over 30?");
 if ((over30Guess.toLowerCase() === 'yes' || over30Guess.toLowerCase() === 'y') && (isOver30 === true)) {
   totalRight++;
