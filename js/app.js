@@ -29,9 +29,11 @@ if ((colorGuess.toLowerCase() === 'yes' || colorGuess.toLowerCase() === 'y') && 
   lastRight = true;
   alertMsg = "Omg, you're starting off things great. That was correct. Total right answers: " + totalRight;
   alert(alertMsg);
+  //console.log("You were right!");
 } else if ((colorGuess.toLowerCase() === 'no' || colorGuess.toLowerCase() === 'n') && (favColorGreen === true)) {
   alertMsg = "Aw, you got the first one wrong, better luck on the next one! Total right answers: " + totalRight;
   alert(alertMsg);
+  //console.log("You were wrong.");
 }
 
 collegeGuess = prompt("Am I a college graduate?");
@@ -43,6 +45,7 @@ if ((collegeGuess.toLowerCase() === 'no' || collegeGuess.toLowerCase() === 'n') 
     alertMsg = "Hooray, broke the wrong streak! " + totalRight;
   }
   alert(alertMsg);
+  //console.log("You were right!");
 } else if ((collegeGuess.toLowerCase() === 'yes' || collegeGuess.toLowerCase() === 'y') && (isCollegeGrad === false)) {
   if (lastRight === true) {
     alertMsg = "Aw, it was only a 50% chance and you had the last one right. Blame it on statistics! Total right answers: " + toalRight;
@@ -50,6 +53,7 @@ if ((collegeGuess.toLowerCase() === 'no' || collegeGuess.toLowerCase() === 'n') 
     alertMsg = "Statistically, you can't keep getting them wrong! Total right answers: " + totalRight;
   }
   alert(alertMsg);
+  //console.log("You were wrong.");
 }
 
 pokerGuess = prompt("Have I professionally played poker?");
@@ -61,6 +65,7 @@ if ((pokerGuess.toLowerCase() === 'yes' || pokerGuess.toLowerCase() === 'y') && 
     alertMsg = "Hooray, broke the wrong streak! " + totalRight;
   }
   alert(alertMsg);
+  //console.log("You were right!");
 } else if ((pokerGuess.toLowerCase() === 'no' || pokerGuess.toLowerCase() === 'n') && (isPokerPlayer === false)) {
   if (lastRight === true) {
     alertMsg = "Aw, it was only a 50% chance and you had the last one right. Blame it on statistics! Total right answers: " + toalRight;
@@ -68,6 +73,7 @@ if ((pokerGuess.toLowerCase() === 'yes' || pokerGuess.toLowerCase() === 'y') && 
     alertMsg = "Statistically, you can't keep getting them wrong! Total right answers: " + totalRight;
   }
   alert(alertMsg);
+  //console.log("You were wrong.");
 }
 
 over30Guess = prompt("Am I over 30?");
@@ -79,6 +85,7 @@ if ((over30Guess.toLowerCase() === 'yes' || over30Guess.toLowerCase() === 'y') &
     alertMsg = "Hooray, broke the wrong streak! " + totalRight;
   }
   alert(alertMsg);
+  //console.log("You were right!");
 } else if ((over30Guess.toLowerCase() === 'no' || over30Guess.toLowerCase() === 'n') && (isOver30 === false)) {
   if (lastRight === true) {
     alertMsg = "Aw, it was only a 50% chance and you had the last one right. Blame it on statistics! Total right answers: " + toalRight;
@@ -86,6 +93,7 @@ if ((over30Guess.toLowerCase() === 'yes' || over30Guess.toLowerCase() === 'y') &
     alertMsg = "Statistically, you can't keep getting them wrong! Total right answers: " + totalRight;
   }
   alert(alertMsg);
+  //console.log("You were wrong.");
 }
 
 livesInCaliGuess = prompt("Do I reside in California?");
@@ -97,6 +105,7 @@ if ((livesInCaliGuess.toLowerCase() === 'no' || livesInCaliGuess.toLowerCase() =
     alertMsg = "Hooray, broke the wrong streak! " + totalRight;
   }
   alert(alertMsg);
+  //console.log("You were right!");
 } else if ((livesInCaliGuess.toLowerCase() === 'yes' || livesInCaliGuess.toLowerCase() === 'y') && (livesInCali === true)) {
   if (lastRight === true) {
     alertMsg = "Aw, it was only a 50% chance and you had the last one right. Blame it on statistics! Total right answers: " + toalRight;
@@ -104,6 +113,7 @@ if ((livesInCaliGuess.toLowerCase() === 'no' || livesInCaliGuess.toLowerCase() =
     alertMsg = "Aw, you got the last answer wrong! Total right answers: " + totalRight;
   }
   alert(alertMsg);
+  //console.log("You were wrong.");s
 }
 
 alert("Thank you for playing my guessing game, " + usersName + " You had " + totalRight + " right answers out of 5 questions. Now you may view my About Me page. PS: Hire Me.");
