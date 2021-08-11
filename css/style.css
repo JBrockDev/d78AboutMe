@@ -3,10 +3,16 @@ header {
   border: 1px solid black;
   width: 100%;
   top: 0;
+  left: 0;
   text-align: center;
   background-color: gray;
 }
 
 main {
   margin-top: 120px;
+}
+
+#bio {
+  border: thin solid gray;
+  padding: 50px;
 }
