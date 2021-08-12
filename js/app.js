@@ -163,6 +163,7 @@ if (guessed === 5 && isNumberCorrect === false) {
 
 let isGameCorrect = false;
 let lcGameGuess;
+let correctAnswers;
 guessed = 1;
 
 while (!isGameCorrect && guessed < 7) {
@@ -172,19 +173,26 @@ while (!isGameCorrect && guessed < 7) {
     if (lcGameGuess === favGames[i]) {
       isGameCorrect = true;
       totalRight++;
-      alertMsg = "You guessed it! Total right answers: " + totalRight;
-      alert(alertMsg);
-      //console.log("Fav Game Guess: You were right!");
+      
+    }
+    if (!correctAnswers) {
+      correctAnswers = "The correct answers were: " + favGames[i];
+    } else if (guessed === 1) {
+      correctAnswers = correctAnswers + ", " + favGames[i];
     }
   }
   if (!isGameCorrect && guessed === 6) {
-    alertMsg = "Sorry, you've used all your guesses.";
+    alertMsg = "Sorry, you've used all your guesses. " + correctAnswers;
     alert(alertMsg);
     //console.log("Fav Game Guess: You ran out of guesses.");
   } else if (!isGameCorrect) {
     alertMsg = "Sorry, please try again! You've used " + guessed + " guesses out of 6";
     alert(alertMsg);
     //console.log("Fav Game Guess: You were wrong.");
+  } else if (isGameCorrect) {
+    alertMsg = "You guessed it! " + correctAnswers + ". Total right answers: " + totalRight;
+    alert(alertMsg);
+    //console.log("Fav Game Guess: You were right!");
   }
   guessed++;
 }
@@ -194,4 +202,3 @@ while (!isGameCorrect && guessed < 7) {
 
 
 alert("Thank you for playing my guessing game, " + usersName + " You had " + totalRight + " right answers out of 7 questions. Now you may view my About Me page. PS: Hire Me.");
-
