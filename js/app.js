@@ -6,6 +6,7 @@ let totalRight = 0;
 let lastRight = false;
 let alertMsg;
 
+
 let favColorGreen = true;
 let isCollegeGrad = false;
 let isPokerPlayer = true;
@@ -154,6 +155,7 @@ function questionNumber() {
       let highLow;
       if (intNumberGuess > rNumber) {
         highLow = "high";
+        
       } else {
         highLow = "low";
       }
@@ -217,3 +219,5 @@ questionFavGames();
 
 
 alert("Thank you for playing my guessing game, " + usersName + " You had " + totalRight + " right answers out of 7 questions. Now you may view my About Me page. PS: Hire Me.");
+
+//testing something
