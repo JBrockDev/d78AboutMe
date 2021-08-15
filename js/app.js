@@ -93,8 +93,6 @@ function arrayQuestion(currentAttempt, currentAnswer, guessPrompt, lowercaseGues
     }
   }
 
-  handleAfterQuestionResponse(isCorrect, questionNumber);
-
   return [isCorrect, stringFromArray];
 }
 
