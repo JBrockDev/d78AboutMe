@@ -1,7 +1,5 @@
 'use strict';
 
-console.log("initialized");
-
 let totalRight = 0;
 let correctStreak = 0;
 let incorrectStreak = 0;
@@ -51,6 +49,7 @@ function yesOrNoQuestion(currentAnswer, lowercaseGuess) {
 function numberGuessQuestion(currentAnswer, guessPrompt, currentAttempt, maxAttempts) {
   let isCorrect = false;
   let numberGuess = parseInt(guessPrompt);
+  // leaving this console.log in only for testing of correct number if anyone wishes to
   console.log("For seeing correct answer path easier only: " + currentAnswer);
   if (currentAnswer === numberGuess) {
     isCorrect = true;
