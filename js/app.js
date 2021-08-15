@@ -3,219 +3,171 @@
 console.log("initialized");
 
 let totalRight = 0;
-let lastRight = false;
+let correctStreak = 0;
+let incorrectStreak = 0;
 let alertMsg;
-
-
-let favColorGreen = true;
-let isCollegeGrad = false;
-let isPokerPlayer = true;
-let isOver30 = true;
-let livesInCali = false;
-let rNumber = Math.floor(Math.random() * (100 - 1) + 1);
-let favGames = ["league of legends", "valorant", "new world", "csgo", "warzone"];
-
-let colorGuess;
-let collegeGuess;
-let pokerGuess;
-let over30Guess;
-let livesInCaliGuess;
-let numberGuess;
-let gameGuess;
+let isArray = false;
 
 let usersName = prompt("Please provide your name.");
 
 alert("Welcome to my About Me page, " + usersName + ". Now before I tell you about me, I'm going to have you guess a few facts about me! Let's begin.");
 
-function questionColor() {
-  colorGuess = prompt("Is my favorite color green?");
-  if ((colorGuess.toLowerCase() === 'yes' || colorGuess.toLowerCase() === 'y') && (favColorGreen === true)) {
-  totalRight++;
-  lastRight = true;
-  alertMsg = "Omg, you're starting off things great. That was correct. Total right answers: " + totalRight;
+let responsesArray = [ // Index 0 - right answers, Index 1 - wrong answers
+  ["Correct, you rock!", "10-4, you are right!", "You were wrong. SIKE! Good job.", "I knew you were a good person!", "Are you psychic?", "Clearly we see eye to eye, hire me?", "Absolutely astounding!", "I think we could be friends!", "There are 10 reasons I like you; you are checking out my page and you got this right."],
+  ["Are you an alien? WRONG!", "You meant to get this wrong, right?", "Abort mission, weirdo detected.", "I bet you think dogs are better than cats, wrong.", "Differences make a stronger team, hire me?", "You should be locked up for thinking that.", "I think this is my queue to leave.", "I could flip a penny and get more answers right than you.", "Statistically, getting this wrong increases the chances of getting the next right.", "We grow the most through failures."]
+]
+
+let questionArray = [
+//  ["Is my favorite color green?", true, 1],
+//  ["Am I a college graduate?", false, 1],
+//  ["Have I professionally played poker?", true, 1],
+//  ["Do I play single player video games?", false, 1],
+//  ["Do I live in California?", false, 1],
+  ["Guess a number 1-100.", getRandomNumber(1, 100), 4],
+  ["Guess one of my favorite numbers.", [33, 19, 99], 6],
+  ["Guess one of my favorite games.", ["league of legends", "new world", "warzone"], 6]
+];
+
+function getRandomNumber(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function yesOrNoQuestion(currentAnswer, lowercaseGuess) {
+  let isCorrect = false;
+  if (currentAnswer === true && (lowercaseGuess === 'yes' || lowercaseGuess === 'y')) {
+    isCorrect = true;
+  } else if (currentAnswer === false && (lowercaseGuess === 'no' || lowercaseGuess === 'n')) {
+    isCorrect = true;
+  }
+  return isCorrect;
+}
+
+function numberGuessQuestion(currentAnswer, guessPrompt, currentAttempt, maxAttempts) {
+  let isCorrect = false;
+  let numberGuess = parseInt(guessPrompt);
+  console.log("For seeing correct answer path easier only: " + currentAnswer);
+
+  if (currentAnswer === numberGuess) {
+    isCorrect = true;
+    alertMsg = "DING DING DING";
+  } else if (numberGuess > currentAnswer && currentAttempt < maxAttempts - 1) {
+    alertMsg = "Your guess is too high.";
+  } else if (numberGuess < currentAnswer && currentAttempt < maxAttempts - 1) {
+    alertMsg = "Your guess is too low.";
+  } else {
+    alertMsg = "Please clean up the drool from your keyboard. -1 attempt.";
+  }
   alert(alertMsg);
-  //console.log("Fav Color: You were right!");
-  } else if ((colorGuess.toLowerCase() === 'no' || colorGuess.toLowerCase() === 'n') && (favColorGreen === true)) {
-    alertMsg = "Aw, you got the first one wrong, better luck on the next one! Total right answers: " + totalRight;
-    lastRight = false;
-    alert(alertMsg);
-    //console.log("Fav Color: You were wrong.");
-  }
+  return isCorrect;
 }
 
-function questionCollege() {
-  collegeGuess = prompt("Am I a college graduate?");
-  if ((collegeGuess.toLowerCase() === 'no' || collegeGuess.toLowerCase() === 'n') && (isCollegeGrad === false)) {
-    totalRight++;
-    if (lastRight === true) {
-      alertMsg = "Right again! Total right answers: " + totalRight;
-    } else {
-      alertMsg = "Hooray, broke the wrong streak! " + totalRight;
-      lastRight = false;
-    }
-    lastRight = true;
-    alert(alertMsg);
-    //console.log("College Grad: You were right!");
-  } else if ((collegeGuess.toLowerCase() === 'yes' || collegeGuess.toLowerCase() === 'y') && (isCollegeGrad === false)) {
-    if (lastRight === true) {
-      alertMsg = "Aw, it was only a 50% chance and you had the last one right. Blame it on statistics! Total right answers: " + totalRight;
-    } else if (lastRight === false) {
-      alertMsg = "Statistically, you can't keep getting them wrong! Total right answers: " + totalRight;
-    }
-    lastRight = false;
-    alert(alertMsg);
-    //console.log("College Grad: You were wrong.");
+function arrayQuestion(currentAttempt, currentAnswer, guessPrompt, lowercaseGuess, stringFromArray, questionNumber) {
+  let isCorrect = false;
+  let isNumberArray = false;
+  isArray = true;
+  if (typeof(currentAnswer[0]) === "number") {
+    isNumberArray = true;
   }
-}
-function questionPoker() {
-  pokerGuess = prompt("Have I professionally played poker?");
-  if ((pokerGuess.toLowerCase() === 'yes' || pokerGuess.toLowerCase() === 'y') && (isPokerPlayer === true)) {
-    totalRight++;
-    if (lastRight === true) {
-      alertMsg = "Right again! Total right answers: " + totalRight;
-    } else {
-      alertMsg = "Hooray, broke the wrong streak! " + totalRight;
-      lastRight = true;
-    }
-    alert(alertMsg);
-    //console.log("Poker player: You were right!");
-  } else if ((pokerGuess.toLowerCase() === 'no' || pokerGuess.toLowerCase() === 'n') && (isPokerPlayer === true)) {
-    if (lastRight === true) {
-      alertMsg = "Aw, it was only a 50% chance and you had the last one right. Blame it on statistics! Total right answers: " + totalRight;
-    } else if (lastRight === false) {
-      alertMsg = "Statistically, you can't keep getting them wrong! Total right answers: " + totalRight;
-    }
-    lastRight = false;
-    alert(alertMsg);
-    //console.log("Poker player: You were wrong.");
-  }
-}
-function questionOver30() {
-  over30Guess = prompt("Am I over 30?");
-  if ((over30Guess.toLowerCase() === 'yes' || over30Guess.toLowerCase() === 'y') && (isOver30 === true)) {
-    totalRight++;
-    if (lastRight === true) {
-      alertMsg = "Right again! Total right answers: " + totalRight;
-    } else {
-      alertMsg = "Hooray, broke the wrong streak! " + totalRight;
-      lastRight = true;
-    }
-    alert(alertMsg);
-    //console.log("Over 30: You were right!");
-  } else if ((over30Guess.toLowerCase() === 'no' || over30Guess.toLowerCase() === 'n') && (isOver30 === true)) {
-    if (lastRight === true) {
-      alertMsg = "Aw, it was only a 50% chance and you had the last one right. Blame it on statistics! Total right answers: " + totalRight;
-    } else if (lastRight === false) {
-      alertMsg = "Statistically, you can't keep getting them wrong! Total right answers: " + totalRight;
-    }
-    lastRight = false;
-    alert(alertMsg);
-    //console.log("Over 30: You were wrong.");
-  }
-}
-function questionLivesInCali() {
-  livesInCaliGuess = prompt("Do I reside in California?");
-  if ((livesInCaliGuess.toLowerCase() === 'no' || livesInCaliGuess.toLowerCase() === 'n') && (livesInCali === false)) {
-    totalRight++;
-    if (lastRight === true) {
-      alertMsg = "Right again! Total right answers: " + totalRight;
-    } else {
-      alertMsg = "Hooray, broke the wrong streak! " + totalRight;
-      lastRight = true;
-    }
-    alert(alertMsg);
-    //console.log("Lives in Cali: You were right!");
-  } else if ((livesInCaliGuess.toLowerCase() === 'yes' || livesInCaliGuess.toLowerCase() === 'y') && (livesInCali === false)) {
-    if (lastRight === true) {
-      alertMsg = "Aw, it was only a 50% chance and you had the last one right. Blame it on statistics! Total right answers: " + totalRight;
-    } else if (lastRight === false) {
-      alertMsg = "Aw, another one wrong! Total right answers: " + totalRight;
-    }
-    lastRight = false;
-    alert(alertMsg);
-    //console.log("Lives in Cali: You were wrong.");
-  }
-}
-//number guess
-function questionNumber() {
-  let guessed = 1;
-  let isNumberCorrect = false;
-  let intNumberGuess;
 
-  while (guessed < 5 && isNumberCorrect === false) {
-    numberGuess = prompt("Guess a number 1 to 100, you have " + (5 - guessed) + " attempts left.");
-    intNumberGuess = parseInt(numberGuess);
-    if (intNumberGuess === rNumber) {
-      isNumberCorrect = true;
-      totalRight++;
-      alertMsg = "Congratulations, you guessed the correct number!"
-      //console.log("1-100 Guess: You were right!");
-    } else {
-      guessed++;
-      let highLow;
-      if (intNumberGuess > rNumber) {
-        highLow = "high";
-        
-      } else {
-        highLow = "low";
+  for (let i = 0; i < currentAnswer.length; i++) {
+    if (isNumberArray) {
+      if (currentAnswer[i] === parseInt(guessPrompt)) {
+        isCorrect = true;
       }
-      alertMsg = "Sorry, you guessed too " + highLow;
-      //console.log("1-100 Guess: You were wrong!");
-    }
-    alert(alertMsg);
-  }
-
-  if (guessed === 5 && isNumberCorrect === false) {
-    alertMsg = "It appears you attempted to guess too many times without getting the answer. The answer was " + rNumber + ". Total right answers: " + totalRight;
-    alert(alertMsg);
-    //console.log("1-100 Guess: Guessed wrong too many times");
-  }
-}
-function questionFavGames() {
-  let isGameCorrect = false;
-  let lcGameGuess;
-  let correctAnswers;
-  let guessed = 1;
-
-  while (!isGameCorrect && guessed < 7) {
-    gameGuess = prompt("Guess one of my favorite pc games.");
-    lcGameGuess = gameGuess.toLowerCase();
-    for (let i = 0; i < favGames.length; i++) {
-      if (lcGameGuess === favGames[i]) {
-        isGameCorrect = true;
-        totalRight++;
-        
-      }
-      if (!correctAnswers) {
-        correctAnswers = "The correct answers were: " + favGames[i];
-      } else if (guessed === 1) {
-        correctAnswers = correctAnswers + ", " + favGames[i];
+    } else {
+      if (currentAnswer[i] === lowercaseGuess) {
+        isCorrect = true;
       }
     }
-    if (!isGameCorrect && guessed === 6) {
-      alertMsg = "Sorry, you've used all your guesses. " + correctAnswers;
-      alert(alertMsg);
-      //console.log("Fav Game Guess: You ran out of guesses.");
-    } else if (!isGameCorrect) {
-      alertMsg = "Sorry, please try again! You've used " + guessed + " guesses out of 6";
-      alert(alertMsg);
-      //console.log("Fav Game Guess: You were wrong.");
-    } else if (isGameCorrect) {
-      alertMsg = "You guessed it! " + correctAnswers + ". Total right answers: " + totalRight;
-      alert(alertMsg);
-      //console.log("Fav Game Guess: You were right!");
+    if (currentAttempt === 0) {
+      stringFromArray += currentAnswer[i];
+      if (i < currentAnswer.length - 1) {
+        stringFromArray += ", ";
+      }
     }
-    guessed++;
+  }
+
+  handleAfterQuestionResponse(isCorrect, questionNumber);
+
+  return [isCorrect, stringFromArray];
+}
+
+function handleAfterArrayQuestionResponse(isCorrect, currentAnswer, stringFromArray) {
+  if (isArray) {
+    if (isCorrect) {
+      alertMsg = "You guessed one of the " + currentAnswer.length + " correct answers from " + stringFromArray + "!";
+    } else {
+      alertMsg = "That was wrong, the correct answers were " + stringFromArray + "!";
+    }
+    alert(alertMsg);
   }
 }
-questionColor();
-questionCollege();
-questionOver30();
-questionLivesInCali();
-questionPoker();
-questionNumber();
-questionFavGames();
+
+function handleAfterQuestionResponse(isCorrect, questionNumber) {
+  let randomResponse;
+  let rnd;
+  if (isCorrect) {
+    correctStreak++;
+    incorrectStreak = 0;
+    totalRight++;
+    rnd = getRandomNumber(0, responsesArray[0].length - 1);
+    randomResponse = responsesArray[0][rnd];
+    alertMsg = randomResponse + "\r\nCorrect Streak: " + correctStreak;
+  } else {
+    incorrectStreak++;
+    correctStreak = 0;
+    rnd = getRandomNumber(0, responsesArray[1].length - 1);
+    randomResponse = responsesArray[1][rnd];
+    alertMsg = randomResponse + "\r\nIncorrect Streak: " + incorrectStreak;
+  }
+ 
+
+  alertMsg += "\r\nCurrent Score: " + totalRight + " out of " + (questionNumber + 1);
+  alert(alertMsg);
+}
+
+function askQuestion(questionNumber) {
+  let currentQuestionArray = questionArray[questionNumber];
+  let currentQuestion = currentQuestionArray[0];
+  let currentAnswer = currentQuestionArray[1];
+  let maxAttempts = currentQuestionArray[2];
+
+  let currentAttempt = 0;
+  let stringFromArray = "";
+  let isCorrect = false;
+
+  while (isCorrect === false && currentAttempt < maxAttempts) {
+    let guessPrompt; 
+    let promptMsg;
+    while(!guessPrompt) { // ensure that something is typed and they didn't just click ok or cancel
+      promptMsg = currentQuestion + " Tries left: " + (maxAttempts - currentAttempt);
+      guessPrompt = prompt(promptMsg);
+    }
+    let lowercaseGuess = guessPrompt.toLowerCase();
+
+    if (typeof(currentAnswer) === "boolean") { // this is for yes/no questions
+      isCorrect = yesOrNoQuestion(currentAnswer, lowercaseGuess);
+    } else if (typeof(currentAnswer) === "number") { // this is for a number guessing game
+      isCorrect = numberGuessQuestion(currentAnswer, guessPrompt, currentAttempt, maxAttempts);
+    } else if (Array.isArray(currentAnswer)) { // this is for an array of answers
+      let returnArray;
+      returnArray = arrayQuestion(currentAttempt, currentAnswer, guessPrompt, lowercaseGuess, stringFromArray, questionNumber);
+      isCorrect = returnArray[0];
+      stringFromArray = returnArray[1];
+    }
+    currentAttempt++;
+  }
+  handleAfterQuestionResponse(isCorrect, questionNumber);
+  
+}
 
 
+for (let i = 0; i < questionArray.length; i++) {
+  askQuestion(i);
+}
 
-alert("Thank you for playing my guessing game, " + usersName + " You had " + totalRight + " right answers out of 7 questions. Now you may view my About Me page. PS: Hire Me.");
+alertMsg = "Thanks for playing the guessing game, " + usersName + ".\r\nYou scored " + totalRight + " out of " + questionArray.length + ".\r\nYou may now view my page. PS. Hire me."
+
+alert(alertMsg);
